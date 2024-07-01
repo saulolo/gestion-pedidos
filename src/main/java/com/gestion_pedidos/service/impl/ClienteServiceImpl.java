@@ -19,8 +19,13 @@ public class ClienteServiceImpl implements IClienteService {
         this.clienteRepository = clienteRepository;
     }
 
-
-
+    
+    /**
+     * Crea un cliente
+     * @param cliente Cliente a crear
+     * @return true si el cliente fue creado correctamente, false en caso contrario
+     * @throws RuntimeException Excepción en caso de error al crear el cliente
+     */
     @Override
     @Transactional
     public boolean crearOActualizarCliente(Cliente cliente) {
