@@ -51,4 +51,20 @@ public class ClienteServiceImpl implements IClienteService {
             throw new Exception("Error al obtener los clientes", e);
         }
     }
+
+    /**
+     * Obtiene un cliente por su identificador
+     * @param id Identificador del cliente
+     * @return Cliente
+     * @throws RuntimeException Excepción en caso de error al obtener el cliente
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public Cliente getClienteById(Long id) {
+        try {
+            return clienteRepository.findById(id).orElse(null);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener el cliente", e);
+        }
+    }
 }

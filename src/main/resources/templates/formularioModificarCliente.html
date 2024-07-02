@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Lista de Clientes</title>
+    <title>Modificar Clientes</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Importación CSS de Bootstrap-->
@@ -17,34 +17,40 @@
     <!--Importación de estilos personalizados-->
     <link rel="stylesheet" href="/styles.css">
 </head>
-<body class="bg-light">
+<body>
 <div class="container p-5 my-5 bg-dark text-white">
-    <h2 class="text-center text-light mb-4">Lista de Clientes</h2>
-    <table class="table table-hover table-bordered shadow-sm">
-        <thead class="table-dark">
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Email</th>
-            <th>Actualizar</th>
-        </tr>
-        </thead>
-        <tbody th:each="clienteTemp : ${clientes}">
-        <tr>
-            <td th:text="${clienteTemp.id}"></td>
-            <td th:text="${clienteTemp.nombre}"></td>
-            <td th:text="${clienteTemp.apellido}"></td>
-            <td th:text="${clienteTemp.email}"></td>
-            <td><a th:href="@{'/cliente/muestraFormularioModificar/' + ${clienteTemp.id}}" class="btn btn-warning">
-                Modificar</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <a th:href="@{/}" class="btn btn-primary mb-3">Regresar</a>
-    <br/>
-    <a th:href="@{/cliente/muestraFormularioAgregar}" class="btn btn-success mb-3">Agregar Cliente</a>
-
+    <h2 class="text-center text-light mb-4">Modificar Cliente</h2>
+    <!--Formulario de Cliente-->
+    <form th:action="@{/cliente/modificarCliente}" th:object="${cliente}" method="post">
+        <!--Campo id-->
+        <div class="mb-3">
+            <label for="id" class="form-label">Id</label>
+            <input type="text" class="form-control bg-dark-gray" id="id" th:field="*{id}" readonly>
+            <span th:if="${#fields.hasErrors('id')}" th:errors="*{id}" class="text-danger"></span>
+        </div>
+        <!--Campo Nombre-->
+        <div class="mb-3">
+            <label for="id" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" th:field="*{nombre}">
+            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></span>
+        </div>
+        <!--Campo Apellido-->
+        <div class="mb-3">
+            <label for="apellido" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="apellido" th:field="*{apellido}">
+            <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}" class="text-danger"></span>
+        </div>
+        <!--Campo Email-->
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" th:field="*{email}">
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+        </div>
+        <!--Botón Guardar-->
+        <button type="submit" class="btn btn-success">Actualizar</button>
+    </form>
+    <!--Botón Regresar-->
+    <a th:href="@{/cliente/listar}" class="btn btn-primary mt-3">Regresar</a>
 </div>
 
 <!--Mensajes de Toastr-->
