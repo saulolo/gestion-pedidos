@@ -28,6 +28,7 @@
             <th>Apellido</th>
             <th>Email</th>
             <th>Actualizar</th>
+            <th>Eliminar</th>
         </tr>
         </thead>
         <tbody th:each="clienteTemp : ${clientes}">
@@ -37,7 +38,12 @@
             <td th:text="${clienteTemp.apellido}"></td>
             <td th:text="${clienteTemp.email}"></td>
             <td><a th:href="@{'/cliente/muestraFormularioModificar/' + ${clienteTemp.id}}" class="btn btn-warning">
-                Modificar</a></td>
+                Modificar</a>
+            </td>
+            <td><a th:href="@{'/cliente/muestraEliminar/' + ${clienteTemp.id}}" class="btn btn-danger"
+                   onclick="return confirm('Vas a eliminar un registro. ¿Estás seguro?')">
+                Eliminar</a>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -47,7 +53,7 @@
 
 </div>
 
-<!--Mensajes de Toastr-->
+<!-- Mensajes de Toastr -->
 <script th:inline="javascript">
     window.onload = function () {
         var msg = [[${mensaje}]];
@@ -59,6 +65,10 @@
             toastr.success("Cliente actualizado con éxito!");
         } else if (msg === "updateError") {
             toastr.error("El cliente no se pudo actualizar");
+        } else if (msg === "deleteOk") {
+            toastr.success("Cliente eliminado con éxito!");
+        } else if (msg === "deleteError") {
+            toastr.error("El cliente no se pudo eliminar");
         }
     }
 

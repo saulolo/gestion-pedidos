@@ -25,4 +25,10 @@ public interface IClienteService {
      * @param id Id del cliente
      */
     Cliente getClienteById(Long id);
+
+    /**
+     * Elimina un cliente por su id
+     * @param id Id del cliente
+     */
+    boolean getDeleteById(Long id);
 }

@@ -67,4 +67,22 @@ public class ClienteServiceImpl implements IClienteService {
             throw new RuntimeException("Error al obtener el cliente", e);
         }
     }
+
+
+    /**
+     * Elimina un cliente por su identificador
+     * @param id Identificador del cliente
+     * @return true si el cliente fue eliminado correctamente, false en caso contrario
+     * @throws RuntimeException Excepción en caso de error al eliminar el cliente
+     */
+    @Override
+    @Transactional
+    public boolean getDeleteById(Long id) {
+        try {
+            clienteRepository.deleteById(id);
+            return !clienteRepository.findById(id).isPresent();
+        } catch (Exception e) {
+            throw new RuntimeException("Error al eliminar el cliente", e);
+        }
+    }
 }

@@ -65,6 +65,10 @@
             toastr.success("Cliente actualizado con éxito!");
         } else if (msg === "updateError") {
             toastr.error("El cliente no se pudo actualizar");
+        } else if (msg === "deleteOk") {
+            toastr.error("Cliente eliminado con éxito!");
+        } else if (msg === "deleteError") {
+            toastr.error("El cliente no se pudo eliminar");
         }
     }
 

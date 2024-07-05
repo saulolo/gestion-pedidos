@@ -3,7 +3,6 @@ package com.gestion_pedidos.controller;
 import com.gestion_pedidos.model.Cliente;
 import com.gestion_pedidos.service.interfaces.IClienteService;
 import jakarta.validation.Valid;
-import org.springframework.data.web.config.PageableHandlerMethodArgumentResolverCustomizer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +24,6 @@ public class Controlador {
 
     public Controlador(IClienteService iClienteService) {
         this.iClienteService = iClienteService;
-
     }
 
 
@@ -144,5 +142,27 @@ public class Controlador {
 
         elModelo.addAttribute("clientes", losClientes);
         return "lista-clientes";
+    }
+
+
+    /**
+     * Elimina un cliente
+     * @param id Identificador del cliente a eliminar
+     * @param redirectAttributes Atributos de redirección
+     * @return Redirección a la lista de clientes
+     * @throws Exception Excepción en caso de error al eliminar el cliente
+     */
+    @GetMapping("/muestraEliminar/{id}")
+    public String getDeleteById(@PathVariable Long id, RedirectAttributes redirectAttributes) {
+        try {
+            if (iClienteService.getDeleteById(id)) {
+                redirectAttributes.addFlashAttribute("mensaje", "deleteOk");
+            } else {
+                redirectAttributes.addFlashAttribute("mensaje", "deleteError");
+            }
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("mensage", "deleteError");
+        }
+        return "redirect:/cliente/listar";
     }
 }
