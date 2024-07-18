@@ -81,7 +81,7 @@
 			<artifactId>spring-security-config</artifactId>
 			<version>${springsecurity.version}</version>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
