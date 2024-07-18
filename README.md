@@ -50,6 +50,9 @@ fuente Java.
 seguridad aplicables para sistemas basados en la arquitectura basados en J2EE, enfocado particularmente sobre proyectos 
 construidos usando SpringFramework
 
+* **Ambientes y Perfiles**: Los perfiles son el mecanismo que nos permite rápidamente cambiar la configuración de 
+nuestra aplicación de un entorno a otro.
+
 
 
 
