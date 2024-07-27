@@ -17,12 +17,12 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/cliente")
-public class Controlador {
+public class ClienteController {
 
 
     private final IClienteService iClienteService;
 
-    public Controlador(IClienteService iClienteService) {
+    public ClienteController(IClienteService iClienteService) {
         this.iClienteService = iClienteService;
     }
 

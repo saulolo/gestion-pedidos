@@ -40,6 +40,7 @@ public class SeguridadAppConfig {
                         formLogin
                                 .loginPage("/login")
                                 .loginProcessingUrl("/autenticacionUsuario")
+                                .failureUrl("/login?error=true")
                                 .permitAll()
                 )
                 .logout(LogoutConfigurer::permitAll
