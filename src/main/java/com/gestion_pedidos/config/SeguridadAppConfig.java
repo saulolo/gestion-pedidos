@@ -43,7 +43,11 @@ public class SeguridadAppConfig {
                                 .failureUrl("/login?error=true")
                                 .permitAll()
                 )
-                .logout(LogoutConfigurer::permitAll
+                .logout(logout ->
+                        logout
+                                .logoutUrl("/logout")
+                                .logoutSuccessUrl("/login?logout=true")
+                                .permitAll()
                 )
                 .csrf(AbstractHttpConfigurer::disable);
 

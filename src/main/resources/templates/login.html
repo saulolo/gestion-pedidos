@@ -32,13 +32,14 @@
 
 
 </head>
-
 <body>
-<!--Bootstrap-->
 <div id="login">
     <div class="container">
         <div id="login-row" class="row justify-content-center align-items-center">
             <div id="login-column" class="col-md-6">
+                <div th:if="${message}" class="alert alert-success" role="alert">
+                    <p th:text="${message}">Has cerrado la sesión</p>
+                </div>
                 <div id="login-box" class="col-md-12">
                     <form id="login-form" class="form" th:action="@{/autenticacionUsuario}" method="post">
                         <h3 class="text-center text-info">Acceso</h3>
@@ -67,5 +68,7 @@
         </div>
     </div>
 </div>
+
+
 </body>
 </html>
