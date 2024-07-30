@@ -16,6 +16,11 @@
     </style>
 </head>
 <body>
+
+<!--todo: 1. Implementar la lógica para traer el rol del usuario  que se registro en la aplicación-->
+<!--todo: Esta implementación solo me quema el titulo mas no me trae el Rol-->
+<p>Rol del usuario: <span th:text="${userRole}"></span></p>
+
 <!--Botón Log-out-->
 <div class="logout-container">
     <a class="btn btn-dark btn-lg text-white" th:href="@{/logout}">
@@ -27,6 +32,7 @@
     <h1>¡Bienvenido a la aplicación de Gestion de Pedidos!</h1>
     <p class="text-center text-black-50 mb-4">Para ver la lista de clientes, haz clic en el siguiente enlace:</p>
     <a th:href="@{/cliente/listar}" class="btn btn-primary">Ir a la lista de clientes</a>
+
 </div>
 </body>
 </html>
