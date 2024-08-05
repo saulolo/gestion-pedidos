@@ -20,15 +20,19 @@ public class SeguridadAppConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        UserDetails user = User.withUsername("user")
-                .password(passwordEncoder().encode("123"))
+        UserDetails admin = User.withUsername("saulolo")
+                .password(passwordEncoder().encode("admin123"))
+                .roles("ADMIN", "USER", "VOLUNTEER")
+                .build();
+        UserDetails user = User.withUsername("felipe")
+                .password(passwordEncoder().encode("user123"))
                 .roles("USER")
                 .build();
-        UserDetails admin = User.withUsername("admin")
-                .password(passwordEncoder().encode("admin123"))
-                .roles("ADMIN")
+        UserDetails volunteer = User.withUsername("alejandra")
+                .password(passwordEncoder().encode("volunteer123"))
+                .roles("VOLUNTEER")
                 .build();
-        return new InMemoryUserDetailsManager(user, admin);
+        return new InMemoryUserDetailsManager(admin, user, volunteer);
     }
 
     @Bean
@@ -37,8 +41,13 @@ public class SeguridadAppConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/login", "/static/**", "/css/**").permitAll()
+                                //ADMIN
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/administradores").hasRole("ADMIN")
+                                //USER
                                 .requestMatchers("/user/**").hasRole("USER")
+                                //VOLUNTEER
+                                .requestMatchers("/volunteer/**").hasRole("VOLUNTEER")
                                 .anyRequest().authenticated()
                 )
                 .formLogin(formLogin ->

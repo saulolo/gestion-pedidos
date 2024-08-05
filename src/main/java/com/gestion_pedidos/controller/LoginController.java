@@ -12,6 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
 
+    /**
+     * Muestra la vista html del login
+     * @param error se envía cuando el usuario o la contraseña son incorrectos
+     * @param logout  se envía cuando se cierra la sesión
+     * @param model se utiliza para enviar mensajes de error o de éxito
+     * @return el html del login
+     */
     @GetMapping("/login")
     public String login(@RequestParam(value = "error", required = false) String error,
                         @RequestParam(value = "logout", required = false) String logout,
@@ -30,8 +37,7 @@ public class LoginController {
         }
     }
     
-    //todo: 1. Impementacón Rol. Corregir el controlador para que me traiga 
-    //todo: el rol
+    //todo: 1. Impementacón Rol. Corregir el controlador para que me traiga el rol
   @GetMapping("/index")
     public String index(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -41,6 +47,16 @@ public class LoginController {
                 .orElse("ROLE_USER");
         model.addAttribute("userRole", userRole);
         return "index";
+    }
+
+
+    /**
+     * Muestra la vista html de los  administradores
+     * @return el html de los administradores
+     */
+    @GetMapping("/administradores")
+    public  String  muestraAdministradores() {
+        return "lista-administradores";
     }
 
 }
