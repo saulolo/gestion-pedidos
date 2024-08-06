@@ -49,7 +49,6 @@ public class LoginController {
         return "index";
     }
 
-
     /**
      * Muestra la vista html de los  administradores
      * @return el html de los administradores
@@ -57,6 +56,16 @@ public class LoginController {
     @GetMapping("/administradores")
     public  String  muestraAdministradores() {
         return "lista-administradores";
+    }
+
+
+    /**
+     * Muestra la vista html de los usuarios que intentan acceder a una página sin permisos
+     * @return el html de los usuarios que intentan acceder a una página sin permisos
+     */
+    @GetMapping("/acceso-denegado")
+    public  String  muestraAccesoDenegado() {
+        return "acceso-denegado";
     }
 
 }
