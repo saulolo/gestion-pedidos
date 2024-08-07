@@ -25,10 +25,25 @@
 
 <!--Botón Log-out-->
 <div class="logout-container">
-    <p>
-        <a th:href="@{/administradores}" class="btn btn-outline-info">Ir a zona de
-            Administradores</a>
-    </p>
+
+    <!--todo: Organizar la restricción de la vista de los roles porque no esta funcionando.-->
+    <!--Zona ayudantes-->
+    <security authorize="hasRole('USER')">
+        <p>
+            <a th:href="@{/assitants}" class="btn btn-outline-info">Ir a zona de
+                Asistentes</a>
+        </p>
+    </security>
+
+    <!--Zona administradores-->
+    <security authorize="hasRole('ADMIN')">
+        <p>
+            <a th:href="@{/administradores}" class="btn btn-outline-info">Ir a zona de
+                Administradores</a>
+        </p>
+    </security>
+
+    <!--Boton cerrar sesión-->
     <a class="btn btn-dark btn-lg text-white" th:href="@{/logout}">
         <span class="glyphicon glyphicon-log-out">Cerrar sesión</span>
     </a>

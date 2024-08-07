@@ -23,7 +23,7 @@ public class SeguridadAppConfig {
     public UserDetailsService userDetailsService() {
         UserDetails admin = User.withUsername("saulolo")
                 .password(passwordEncoder().encode("admin123"))
-                .roles("ADMIN", "USER", "VOLUNTEER")
+                .roles("ADMIN", "USER")
                 .build();
         UserDetails user = User.withUsername("felipe")
                 .password(passwordEncoder().encode("user123"))
@@ -39,6 +39,7 @@ public class SeguridadAppConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                //Usuarios
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/login", "/static/**", "/css/**").permitAll()
@@ -47,10 +48,12 @@ public class SeguridadAppConfig {
                                 .requestMatchers("/administradores").hasRole("ADMIN")
                                 //USER
                                 .requestMatchers("/user/**").hasRole("USER")
+                                .requestMatchers("/assitants/**").hasRole("USER")
                                 //VOLUNTEER
                                 .requestMatchers("/volunteer/**").hasRole("VOLUNTEER")
                                 .anyRequest().authenticated()
                 )
+                //Hacer login
                 .formLogin(formLogin ->
                         formLogin
                                 .loginPage("/login")
@@ -58,12 +61,14 @@ public class SeguridadAppConfig {
                                 .failureUrl("/login?error=true")
                                 .permitAll()
                 )
+                //Hacer logut
                 .logout(logout ->
                         logout
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/login?logout=true")
                                 .permitAll()
                 )
+                //Para denegar accesos
                 .exceptionHandling(exceptionHandling ->
                         exceptionHandling.accessDeniedPage("/acceso-denegado")
                 )
